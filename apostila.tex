@@ -1,0 +1,392 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{atbegshi}
+\usepackage{float}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[portuguese]{babel}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1 {À}{{\`A}}1 {È}{{\`E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ñ}{{\~n}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1 {Ñ}{{\~N}}1 {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1 {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {€}{{\EUR}}1 {£}{{\pounds}}1 {“}{{``}}1 {”}{{''}}1 {‘}{{`}}1 {’}{{'}}1 {°}{{\degree}}1,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{orange},
+    breaklines=true,
+    showstringspaces=false
+}
+
+% Definindo estilo para o código Portugol
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    captionpos=b,
+    language=,
+    morekeywords={programa, funcao, inicio}
+}
+
+% Definindo cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Lógica de Programação}
+\lhead{Gustavo Pires Bertaco}
+\rfoot{Página \thepage}
+
+\title{\textbf{Lógica de Programação: múltiplos valores e módulos} \\ Turma 2024A}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{4cm}
+    {\huge\bfseries Lógica de Programação: múltiplos valores e módulos\\ Turma 2024A\par}
+    \vspace{2cm}
+    \begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Descrição do Curso]
+        \small Aqui vamos começar a permitir que nossos programas recebam muitos dados e que eles sejam segmentados. Isso permitirá elaborar pequenos sistemas. 
+    \end{tcolorbox}
+    \vfill
+    {\Large Gustavo Pires Bertaco\par}
+    {\large Julho 2024\par}
+\end{titlepage}
+
+\newpage
+
+\renewcommand{\contentsname}{Sumário}
+\tableofcontents
+
+\newpage
+
+\section{Conhecendo o Portugol Studio, Vetores e Matrizes}
+\subsection{Instalando e Explorando o Portugol}
+Antes de começar os estudos, vamos conhecer o Portugol Studio.
+
+\begin{itemize}
+    \item \textbf{1-Fazendo o download e instalando o Portugol Studio}
+\end{itemize}
+
+Você pode encontrar o link para baixar o Portugol Studio na página principal do nosso curso, ou acessando em o link Download em: \href{http://lite.acad.univali.br/portugol/}{http://lite.acad.univali.br/portugol/}
+
+Após baixar, basta fazer a instalação do software.
+
+Atenção: o Portugol Studio é compatível com Windows, Linux e MAC OS. O tamanho do arquivo para download é de aproximadamente 75 MB. Dúvidas ou problemas na instalação, acesse \href{http://lite.acad.univali.br/portugol/}{http://lite.acad.univali.br/portugol/} ou entre em contato com portugol.studio@gmail.com. 
+
+\begin{itemize}
+    \item \textbf{2-Acessando pela 1a vez}
+\end{itemize}
+Sempre que você abrir o Portugol Studio, você encontrará na tela inicial, as opções para "Programar", "Ajuda", "Vídeo aulas" ou "Bibliotecas". Além disto, você terá acesso a vários exemplos de códigos, super úteis para se inspirar nas soluções. Explore!
+
+\begin{itemize}
+    \item \textbf{3-Acessando pela 1a vez}
+\end{itemize}
+Para fazer o seu programa, na tela inicial clique em "Programar". Um arquivo novo chamado "Sem título" é criado. Dentro dele, o Portugol já insere um trecho de código (ver abaixo) com a estrutura básica de um programa.
+
+\begin{lstlisting}
+programa
+{
+    funcao inicio()
+    {
+
+    }
+}
+\end{lstlisting}
+
+Como este arquivo não está mais vazio (afinal, o próprio programa o modificou), o Portugol perguntará se você deseja salvar as alterações quando sair dele. Caso não tenha acrescentado nada ao código, você não precisa salvá-lo (neste caso, selecione a opção "Não").
+
+Quando fizer os exercícios e desejar, de fato, salvar um arquivo, você deverá clicar no primeiro dos cinco ícones que ficam abaixo do título "Portugol Studio", no canto superior esquerdo da tela.
+
+Dica: Se você deixar o mouse parado em cima do ícone, serão exibidas as descrições de cada botão.
+
+Selecione então a pasta onde deseja salvar seu arquivo e clique no ícone de uma pendrive para Salvar.
+
+\subsubsection{Link para Download do Portugol Studio}
+Click \href{http://lite.acad.univali.br/portugol/}{http://lite.acad.univali.br/portugol/} link to open resource.
+
+\subsubsection{Vídeo de introdução ao Portugol Studio}
+Caro aluno,recomendamos que você assista este vídeo após ter instalado o software Portugol Studio em seu computador.
+
+\href{https://www.youtube.com/watch?v=8njsRMvongk}{https://www.youtube.com/watch?v=8njsRMvongk}
+
+\subsection{Apresentação}
+Novos desafios estão chegando! Neste módulo iremos conhecer os vetores e matrizes. Para compreendê-los, imagine que você tenha que fazer um programa que leia e armazene o nome de 10 pessoas. Fácil? Basta criar 10 variáveis, como: nome1, nome2, nome3... até nome10.
+
+Vamos complicar a história... E se o programa pedisse para ler e armazenar o nome de 500 pessoas? Impossível não seria, mas cansativo, com certeza. E se ao invés de criar 500 variáveis, você pudesse criar apenas 1 variável que tivesse 500 lugares para guardar os nomes? Esses são os vetores! E se além do nome, armazenássemos os sobrenomes das 500 pessoas? Podemos fazer através das matrizes!
+
+Os vetores e matrízes são como os edifícios. Temos um endereço único (do edifício), porém cada apartamento tem seu lugar definido, seu número identificador. Para chegar em um endereço, basta sabermos o endereço do edifício e então localizar o apartamento.
+
+\subsection{Vídeo sobre Vetores}
+Caro aluno, ao visualizar este vídeo você aprenderá sobre o que são e como funcionam os vetores.
+\href{https://www.youtube.com/watch?v=f6ET-SyU9bs}{https://www.youtube.com/watch?v=f6ET-SyU9bs}
+
+\subsection{Vídeo sobre Matrizes}
+Caro aluno,ao visualizar este vídeo você aprenderá sobre o que são e como funcionam as matrizes.
+\href{https://www.youtube.com/watch?v=Sm2jdh4NNN8}{https://www.youtube.com/watch?v=Sm2jdh4NNN8}
+
+\subsection{Praticando um pouco...}
+\begin{itemize}
+    \item \textbf{Exercício 1}: Faça um programa que contenha um vetor de 4 posições. Preencha as posições com os valores 5, 9, 20, 5. Exiba o valor contido na posição 2.
+    \item \textbf{Exercício 2}: Faça um programa que crie um vetor para abrigar 5 nomes de pessoas. Também crie uma variável que guardará a posição de um vetor. Depois, indique que a posição é 3 e que nesta posição deve ser armazenado o nome Amanda. Exiba na tela o conteúdo da posição corrente.
+    \item \textbf{Exercício 3}: Faça um programa que crie um vetor de 10 números inteiros. Em seguida, peça para o usuário informar os 10 valores.
+    \item \textbf{Exercício 4}: Faça um programa que crie um vetor de 10 números inteiros. Em seguida, peça para o usuário informar os 10 valores. Após isso, exiba os 10 valores (um por linha)
+    \item \textbf{Exercício 5}: Escreva um algoritmo que lê um vetor com seis posições e o escreve. Conte, a seguir, quantos valores do vetor são negativos e escreva esta informação.
+    \item \textbf{Exercício 6}: Faça um algoritmo que leia uma matriz 4x4 e imprima na tela a soma dos elementos abaixo da diagonal principal da matriz.
+\end{itemize}
+
+\subsection*{Gabarito}
+\begin{itemize}
+    \item \textbf{Exercício 1: Preenchendo o vetor}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro vetor[4]
+            vetor[0] = 5
+            vetor[1] = 9
+            vetor[2] = 20
+            vetor[3] = 5
+            escreva("O vetor na posição 2 é " + vetor[2])
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 2: Nome corrente}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            cadeia nomes[5]
+            inteiro pos
+            pos = 3
+            nomes[pos] = "Amanda"
+            escreva("O vetor na posição 3 é " + nomes[pos])
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 3: Preencher 10 valores}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro vetor[10]
+            para (inteiro pos = 0; pos < 10; pos++){
+                escreva("Informe o número da posição " + (pos+1) + ": ")
+                leia(vetor[pos])
+            }
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 4: Preencher e exibir 10 valores}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro vetor[10]
+            para (inteiro pos = 0; pos < 10; pos++){
+                escreva("Informe o número da posição " + (pos+1) + ": ")
+                leia(vetor[pos])
+            }
+            para (inteiro pos = 0; pos < 10; pos++){
+                escreva(vetor[pos] + "\n")
+            }
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 5: Números negativos}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro vetor[6]
+            para (inteiro pos = 0; pos < 6; pos++){
+                escreva("Informe o número da posição " + (pos+1) + ": ")
+                leia(vetor[pos])
+            }
+            para (inteiro pos = 0; pos < 6; pos++){
+                se(vetor[pos] < 0){
+                    escreva("O valor " + vetor[pos] + " é negativo\n")
+                }
+            }
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 6: Diagonal Principal}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro matriz[4][4], soma = 0
+            para (inteiro i = 0; i < 4; i++){
+                para (inteiro j = 0; j < 4; j++){
+                    escreva("Informe o número da posição [" + (i+1) + "][" + (j+1) + "]: ")
+                    leia(matriz[i][j])
+                }
+            }
+            para (inteiro pos = 0; pos < 4; pos++){
+                soma = soma + matriz[pos][pos]
+            }
+            escreva("A soma é: " + soma)
+        }
+    }
+    \end{lstlisting}
+\end{itemize}
+
+
+\section{Funções e Parâmetros}
+\subsection{Apresentação}
+Estamos chegando ao fim da aprendizagem de Lógica de Programação. Até aqui criamos programas sequenciais, com alguns desvios, repetições, e até mesmo vetores. Porém, há momentos que um determinado trecho de programa precisa ser executado várias vezes, em momentos diversos. Ainda, a medida que vamos criando programas mais complexos, ficará mais difícil de acompanhar tanto código-fonte.
+
+Para isto, existe o conceito de modularização de programas. Isto é, criamos pequenos trechos de programas que executarão ações as quais serão necessárias várias vezes em um grande programa de computador. Para modularizar, criamos funções. Por exemplo, uma função que calcula a conversão de uma moeda estrangeira para o Real; ou uma função que calcula quantos caracteres tem um nome.
+
+É claro que estas funções precisarão ser customizadas, ou seja, é preciso uma flexibilização para saber qual nome que se deseja calcular a quantidade de caracteres. Para isto, existem os parâmetros: variáveis ou valores passados às funções para realizarmos os cálculos.
+
+\subsection{Vídeo sobre Funções}
+Caro aluno, ao visualizar este vídeo você aprenderá sobre o que são e como funcionam as funções.
+\href{https://www.youtube.com/watch?v=kek2q1kak9E}{https://www.youtube.com/watch?v=kek2q1kak9E}
+
+\subsection{Vídeo sobre Parâmetros}
+Caro aluno, ao visualizar este vídeo você aprenderá sobre o que são e como funcionam os parâmetros.
+\href{https://www.youtube.com/watch?v=SHAyNNSyitk}{https://www.youtube.com/watch?v=SHAyNNSyitk}
+
+\subsection{Praticando um pouco...}
+\begin{itemize}
+    \item \textbf{Exercício 1}: Faça um programa contendo uma função que retorne 1 se o número digitado for positivo ou 0 se for negativo.
+    \item \textbf{Exercício 2}: Faça uma função que leia cinco valores inteiros, determine e mostre o maior e o menor deles.
+    \item \textbf{Exercício 3}: Faça uma função que receba como parâmetro uma matriz A(5,5) preenchida com números reais e retorne a soma de seus elementos.
+    \item \textbf{Exercício 4}: Faça uma sub-rotina que receba um único valor representando segundos. Essa função deverá convertê-lo para horas,  minutos e segundos. Todas as variáveis devem ser passadas como parâmetro, não havendo variáveis globais.
+\end{itemize}
+
+\subsection*{Gabarito}
+\begin{itemize}
+    \item \textbf{Exercício 1: Positivo ou Negativo}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            escreva(positivonegativo(-5), "\n")
+            escreva(positivonegativo(1))
+        }
+        funcao inteiro positivonegativo (inteiro numero)
+        {
+            se (numero < 0){
+                retorne 0
+            }
+            senao{
+                retorne 1
+            }
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 2: Maior e Menor valor}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro numeros[5]
+            escreva("Escreva os números: ")
+            para(inteiro n = 0; n < 5; n++){
+                leia(numeros[n])
+            }
+            maiormenorde5(numeros)
+        }
+        funcao maiormenorde5 (inteiro numeros[])
+        {
+            inteiro maior = numeros[0]
+            inteiro menor = numeros[0]
+            para(inteiro n = 1; n < 5; n++){
+                se(numeros[n] > maior){
+                    maior = numeros[n]
+                }
+                se(numeros[n] < menor){
+                    menor = numeros[n]
+                }
+            }
+            escreva("Maior número: ", maior, "\n")
+            escreva("Menor número: ", menor, "\n")
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 3: Soma Matriz}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            real matriz[5][5]
+            escreva("Informe os números: \n")
+            para(inteiro i = 0; i < 5; i++){
+                para(inteiro j = 0; j < 5; j++){
+                    escreva("Posição [", (i+1), "][", (j+1), "]: ")
+                    leia(matriz[i][j])
+                }
+            }
+            escreva("A soma é: ", somaMatriz(matriz))
+        }
+        funcao real somaMatriz(inteiro mat[][])
+        {
+            real soma = 0
+            para(inteiro i = 0; i < 5; i++){
+                para(inteiro j = 0; j < 5; j++){
+                    soma = soma + mat[i][j]
+                }
+            }
+            retorne soma
+        }
+    }
+    \end{lstlisting}
+
+    \item \textbf{Exercício 4: Hora, Minuto, Segundo}
+    \begin{lstlisting}
+    programa
+    {
+        funcao inicio()
+        {
+            inteiro total, hora = 0, minuto = 0, segundo = 0
+            escreva("Informe os segundos: \n")
+            leia(total)
+            tempo(total, hora, minuto, segundo)
+            escreva("O tempo é: ", hora, ":", minuto, ":", segundo)
+        }
+        funcao tempo(inteiro t, inteiro &h, inteiro &m, inteiro &s)
+        {
+            h = t / (60 * 60)
+            m = (t - (h * 60 * 60)) / 60
+            s = (t - (h * 60 * 60)) % 60
+        }
+    }
+    \end{lstlisting}
+\end{itemize}
+
+\end{document}
